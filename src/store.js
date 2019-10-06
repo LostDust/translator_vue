@@ -19,16 +19,23 @@ const store = new Vuex.Store({
     alertList: []
   },
   mutations: {
-    // save(state) {},
+    save(state) {
+      fetch(`http://203.195.141.131:3100/save/`, {
+        method: "POST",
+        body: JSON.stringify(state.data.public),
+        headers: { "content-type": "application/json" }
+      })
+        .then(res => res.text())
+        .then(msg => {
+          console.log(msg);
+        });
+    },
     alertMessage(state, msg) {
       const id = new Date().getTime();
       state.alertList.push({ content: msg, id });
       setTimeout(() => {
         state.alertList.shift();
       }, 2000);
-    },
-    removeMessage(state, index) {
-      state.alertList.splice(index, 1);
     },
     query(state) {
       const result = state.data[state.store].some(item => {
@@ -44,19 +51,16 @@ const store = new Vuex.Store({
       });
       if (state.store === "local")
         localStorage.setItem(state.input, state.output);
-      // this.commit("save");
-      // TODO 移动
+      else this.commit("save");
       state.has = true;
       this.commit("alertMessage", "收藏成功");
     },
     removeItem(state, [store, index]) {
-      const item = state.data[store].splice(index, 1);
-      if (store === "local") {
-        console.log(typeof item[0].from);
-        localStorage.removeItem(item[0].from);
-      }
-      // this.commit("save");
-      // TODO 移动
+      const newData = Object.assign({}, state.data);
+      const item = newData[store].splice(index, 1);
+      state.data = newData;
+      if (store === "local") localStorage.removeItem(item[0].from);
+      else this.commit("save");
       this.commit("alertMessage", "删除成功");
     },
     update(state, content) {

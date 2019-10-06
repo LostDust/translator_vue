@@ -29,7 +29,11 @@
               alt="close-circle"
               @click="$store.commit('removeItem', [$route.query.store, index])"
             />
-            <img src="http://203.195.141.131:3100/src/png/tool.png" alt="message" @click="alert" />
+            <img
+              src="http://203.195.141.131:3100/src/png/tool.png"
+              alt="message"
+              @click="alertText"
+            />
           </td>
         </tr>
       </tbody>
@@ -49,7 +53,7 @@ export default {
         `tbody tr:nth-child(${index + 1}) [alt=play-circle]`
       ).style.visibility = "hidden";
     },
-    alert() {
+    alertText() {
       alert("Test");
     }
   },

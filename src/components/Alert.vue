@@ -3,12 +3,6 @@
     <transition-group tag="ul">
       <li v-for="(item, index) in $store.state.alertList" :key="item.id">
         <p>{{ item.content }}</p>
-        <img
-          src="http://203.195.141.131:3100/src/png/close-circle.png"
-          alt="close-circle"
-          @click.stop="$store.commit('removeMessage', index)"
-          @selectstart.prevent
-        />
       </li>
     </transition-group>
   </section>
@@ -18,15 +12,7 @@
 <script>
 export default {
   name: "Alert",
-  data() {
-    return {};
-  },
-  methods: {
-    removeAlert(index) {
-      console.log(index);
-      this.list.splice(index, 1);
-    }
-  }
+  methods: {}
 };
 </script>
 
@@ -76,12 +62,12 @@ export default {
     transform: translateY(60px);
     opacity: 0;
   }
+  .v-leave-active {
+    position: absolute;
+  }
   .v-enter-active,
   .v-leave-active {
     transition: all ease 1s;
-  }
-  .v-leave-active {
-    position: absolute;
   }
   .v-leave-to {
     transform: translateY(-120px);
