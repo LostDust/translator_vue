@@ -16,21 +16,21 @@
           <td>{{ item.to }}</td>
           <td>
             <audio
-              :src="`http://203.195.141.131:3100/src/media/${item.from}.mp3`"
+              :src="`http://203.195.141.131:3100/static/media/${item.from}.mp3`"
               @error="notFind(index)"
             ></audio>
             <img
-              src="http://203.195.141.131:3100/src/png/play-circle.png"
+              src="http://203.195.141.131:3100/static/png/play-circle.png"
               alt="play-circle"
               @click="play(index)"
             />
             <img
-              src="http://203.195.141.131:3100/src/png/close-circle.png"
+              src="http://203.195.141.131:3100/static/png/close-circle.png"
               alt="close-circle"
               @click="$store.commit('removeItem', [$route.query.store, index])"
             />
             <img
-              src="http://203.195.141.131:3100/src/png/tool.png"
+              src="http://203.195.141.131:3100/static/png/tool.png"
               alt="message"
               @click="alertText"
             />

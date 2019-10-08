@@ -12,7 +12,7 @@
       </li>
       <li>
         <img
-          :src="`http://203.195.141.131:3100/src/png/star${$store.state.has?'-active':''}.png`"
+          :src="`http://203.195.141.131:3100/static/png/star${$store.state.has?'-active':''}.png`"
           @click="addItem"
         />
       </li>
